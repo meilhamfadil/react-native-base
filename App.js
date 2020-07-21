@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 import { name as appName } from './app.json'
 import colors from './assets/colors'
+import { registerAnimation } from './assets/animations'
 import Routes from './src/routes'
 
 const theme = {
@@ -16,8 +17,9 @@ const theme = {
     },
 };
 
+registerAnimation()
+
 export default function Main() {
-    LogBox.ignoreAllLogs(true)
     return <PaperProvider theme={theme}>
         <NavigationContainer>
             <Routes initialRoute="splash" />

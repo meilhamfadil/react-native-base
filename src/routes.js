@@ -8,12 +8,11 @@ const Routes = ({ initialRoute }) => {
         <Stack.Screen
             name="splash"
             component={require("./screen/SplashScreen").default}
-            options={{
-                headerShown: false
-            }} />
+            options={{ headerShown: false }} />
         <Stack.Screen
             name="main"
-            component={require("./screen/MainScreen").default} />
+            component={require("./screen/MainScreen").default}
+            options={{ headerShown: false }} />
     </Stack.Navigator>
 }
 
