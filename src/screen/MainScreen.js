@@ -1,10 +1,13 @@
 import React from 'react'
 
-import { Button, Appbar } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 import { View, Text } from "react-native"
 import BaseScreen from '../core/BaseScreen'
 import Scaffhold from '../components/Scaffhold'
 import Padding from '../components/Padding'
+import { connect } from 'react-redux'
+
+import MoviesAction from '../action/moviesAction'
 
 class MainScreen extends BaseScreen {
 
@@ -13,36 +16,50 @@ class MainScreen extends BaseScreen {
         setTimeout(() => { this.setBusy(false) }, 3000);
     }
 
-    render() {
-        return <Scaffhold
-            busy={this.state.isBusy}
-            appbar={
-                <Appbar.Header>
-                    <Appbar.Content title="Base Apps" />
-                </Appbar.Header>
-            }
-            body={
-                <View style={this.styles.mainCenterContainer}>
-                    <Text style={{ textAlign: "center" }}>Content Loaded</Text>
-                </View>
-            }
-            footer={
-                <Padding all={12}>
-                    <Button
-                        loading={this.state.isRequesting}
-                        disabled={this.state.isRequesting || this.state.isBusy}
-                        color={this.theme.primary}
-                        onPress={async () => {
-                            this.setRequesting(true)
-                            setTimeout(() => {
-                                this.setRequesting(false)
-                            }, 1000);
-                        }}
-                        mode="contained">Click Me</Button>
-                </Padding>
-            }
-        />
+    render = () => <Scaffhold
+        busy={this.state.isBusy}
+        body={
+            <View style={this.styles.mainCenterContainer}>
+                <Text style={{ textAlign: "center" }}>Jumlah List Ada : {this.props.employee.length}</Text>
+                {
+                    this.props.error != null &&
+                    <Text style={{ textAlign: "center" }}>{this.props.error}</Text>
+                }
+
+            </View>
+        }
+        bottom={
+            <Padding all={12}>
+                <Button
+                    loading={this.state.isRequesting}
+                    disabled={this.state.isRequesting || this.state.isBusy}
+                    onPress={async () => {
+                        this.setRequesting(true)
+                        const list = await this.repository.getMovie()
+                        if (list.code == 0)
+                            this.props.addMovies(list.data)
+                        else
+                            this.props.doError(list.message)
+                        this.setRequesting(false)
+                    }}
+                    mode="contained">Load Image</Button>
+            </Padding>
+        }
+    />
+}
+
+const mapStateToProps = (state) => {
+    return {
+        employee: state.employee.list,
+        error: state.employee.error
     }
 }
 
-export default MainScreen
+const mapActionToProps = (dispatch) => {
+    return {
+        addMovies: (data) => dispatch(MoviesAction.moviesSuccess(data)),
+        doError: (errorMessage) => dispatch(MoviesAction.moviesFailure(errorMessage))
+    }
+}
+
+export default connect(mapStateToProps, mapActionToProps)(MainScreen)

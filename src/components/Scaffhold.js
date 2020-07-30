@@ -4,8 +4,8 @@ import styles from '../../assets/styles'
 
 import { View, ScrollView, KeyboardAvoidingView, Text, ActivityIndicator } from 'react-native'
 
-const Scaffhold = ({ body, appbar = null, footer = null, busy = false }) => {
-    return <View style={{ flex: 1, backgroundColor: colors.background }}>
+const Scaffhold = ({ body, appbar = null, bottom = null, busy = false }) => {
+    return <View style={{ flex: 1 }}>
         <View>{appbar !== null && appbar}</View>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             {
@@ -18,7 +18,7 @@ const Scaffhold = ({ body, appbar = null, footer = null, busy = false }) => {
             }
         </ScrollView>
         <KeyboardAvoidingView>
-            <View>{(footer !== null && !busy) && footer}</View>
+            <View>{(bottom !== null && !busy) && bottom}</View>
         </KeyboardAvoidingView>
     </View>
 }

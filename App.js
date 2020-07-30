@@ -1,11 +1,13 @@
 import React from 'react'
-import { AppRegistry, LogBox } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
+import { AppRegistry } from 'react-native'
 import { name as appName } from './app.json'
-import colors from './assets/colors'
+import { Provider } from 'react-redux';
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 import { registerAnimation } from './assets/animations'
-import Routes from './src/routes'
+
+import configureStore from './src/reducer/storeApp'
+import colors from './assets/colors'
+import AppComponent from './src/component'
 
 const theme = {
     ...DefaultTheme,
@@ -17,14 +19,16 @@ const theme = {
     },
 };
 
+// Register Base
+const store = configureStore()
 registerAnimation()
 
 export default function Main() {
-    return <PaperProvider theme={theme}>
-        <NavigationContainer>
-            <Routes initialRoute="splash" />
-        </NavigationContainer>
-    </PaperProvider>
+    return <Provider store={store}>
+        <PaperProvider theme={theme}>
+            <AppComponent />
+        </PaperProvider>
+    </Provider>
 }
 
 AppRegistry.registerComponent(appName, () => Main)

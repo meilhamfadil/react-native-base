@@ -11,7 +11,7 @@ class SplashScreen extends BaseScreen {
 
     doCheckCredential = async () => {
         setTimeout(() => {
-            this.props.navigation.navigate("main")
+            this.props.navigation.replace("main")
         }, 500);
     }
 
@@ -25,11 +25,9 @@ class SplashScreen extends BaseScreen {
                     <FillSeparator />
 
                     <Animatable.View
-                        duration={600}
+                        duration={800}
                         animation={this.animations.logoAnimation}
-                        onAnimationEnd={async () => {
-                            this.doCheckCredential()
-                        }}>
+                        onAnimationEnd={this.doCheckCredential}>
                         <Icon name="memory" size={100} />
                     </Animatable.View>
 
