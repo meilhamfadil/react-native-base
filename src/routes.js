@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 const Stack = createStackNavigator()
 
 const Routes = ({ initialRoute }) => {
-    return <Stack.Navigator initialRouteName={initialRoute}>
+    return <Stack.Navigator initialRouteName={initialRoute} i>
         <Stack.Screen
             name="splash"
             component={require("./screen/SplashScreen").default}

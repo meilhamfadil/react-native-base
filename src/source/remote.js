@@ -1,16 +1,35 @@
-const { create } = require("apisauce")
+import apisauce from 'apisauce'
 
-const baseUrl = "https://meilhamfadil.github.io"
+const create = () => {
+    // Initialize Api
+    const api = apisauce.create({
+        baseURL: "https://meilhamfadil.github.io",
+        headers: {
+            "Application-Type": "application/json"
+        }
+    })
 
-const api = create({
-    baseURL: baseUrl,
-    headers: {
-        "Application-Type": "application/json"
+    // Endpoint
+    const getMovie = () => api.get("movies-failure.json").then(intepreter)
+
+    // Export
+    return {
+        getMovie
     }
-})
+}
 
-const getMovie = () => api.get("movies.json")
+
+const intepreter = (response) => {
+    if (response.ok) {
+        return response.data
+    } else {
+        return {
+            code: 1,
+            message: response.problem
+        }
+    }
+}
 
 export default {
-    getMovie: getMovie
+    create
 }

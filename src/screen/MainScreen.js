@@ -2,64 +2,61 @@ import React from 'react'
 
 import { Button } from 'react-native-paper'
 import { View, Text } from "react-native"
-import BaseScreen from '../core/BaseScreen'
 import Scaffhold from '../components/Scaffhold'
 import Padding from '../components/Padding'
 import { connect } from 'react-redux'
 
-import MoviesAction from '../action/moviesAction'
+import MovieAction from '../reducer/movieReducer'
+import CenteredContainer from '../components/CenteredContainer'
 
-class MainScreen extends BaseScreen {
+const MainScreen = (props) => {
+    const { movies, error } = props
+    const { busy, requesting } = props
+    const { requestMovies, isMoviesFetching } = props
 
-    componentDidMount() {
-        this.setBusy(true)
-        setTimeout(() => { this.setBusy(false) }, 3000);
+    const onPressHandler = () => {
+        console.log("hehe")
+        requestMovies()
     }
 
-    render = () => <Scaffhold
-        busy={this.state.isBusy}
+    return <Scaffhold
         body={
-            <View style={this.styles.mainCenterContainer}>
-                <Text style={{ textAlign: "center" }}>Jumlah List Ada : {this.props.employee.length}</Text>
+            <CenteredContainer>
+                <Text style={{ textAlign: "center" }}>
+                    Jumlah List Ada : {movies.length}
+                </Text>
                 {
-                    this.props.error != null &&
-                    <Text style={{ textAlign: "center" }}>{this.props.error}</Text>
+                    error != null &&
+                    <Text style={{ textAlign: "center" }}>{error}</Text>
                 }
-
-            </View>
+            </CenteredContainer>
         }
         bottom={
             <Padding all={12}>
                 <Button
-                    loading={this.state.isRequesting}
-                    disabled={this.state.isRequesting || this.state.isBusy}
-                    onPress={async () => {
-                        this.setRequesting(true)
-                        const list = await this.repository.getMovie()
-                        if (list.code == 0)
-                            this.props.addMovies(list.data)
-                        else
-                            this.props.doError(list.message)
-                        this.setRequesting(false)
-                    }}
-                    mode="contained">Load Image</Button>
+                    loading={isMoviesFetching || requesting}
+                    disabled={requesting || busy}
+                    mode="contained"
+                    onPress={onPressHandler}> Load Image </Button>
             </Padding>
         }
     />
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ base, movie }) => {
     return {
-        employee: state.employee.list,
-        error: state.employee.error
+        busy: base.busy,
+        requesting: base.requesting,
+        movies: movie.list,
+        isMoviesFetching: movie.fetching,
+        error: movie.error,
     }
 }
 
-const mapActionToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        addMovies: (data) => dispatch(MoviesAction.moviesSuccess(data)),
-        doError: (errorMessage) => dispatch(MoviesAction.moviesFailure(errorMessage))
+        requestMovies: () => dispatch(MovieAction.moviesRequest())
     }
 }
 
-export default connect(mapStateToProps, mapActionToProps)(MainScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen)

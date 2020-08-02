@@ -1,11 +1,9 @@
 import React from 'react'
-import { AppRegistry } from 'react-native'
-import { name as appName } from './app.json'
 import { Provider } from 'react-redux';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 import { registerAnimation } from './assets/animations'
 
-import configureStore from './src/reducer/storeApp'
+import store from './src/redux/storeApp'
 import colors from './assets/colors'
 import AppComponent from './src/component'
 
@@ -20,15 +18,12 @@ const theme = {
 };
 
 // Register Base
-const store = configureStore()
 registerAnimation()
 
-export default function Main() {
+export default function App() {
     return <Provider store={store}>
         <PaperProvider theme={theme}>
             <AppComponent />
         </PaperProvider>
     </Provider>
 }
-
-AppRegistry.registerComponent(appName, () => Main)
