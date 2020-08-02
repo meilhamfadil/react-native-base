@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Scaffhold from '../components/Scaffhold'
-import { Text } from 'react-native'
+
 import { Button } from 'react-native-paper'
 import { Center } from '../components/Container'
 

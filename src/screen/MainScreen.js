@@ -37,17 +37,18 @@ const MainScreen = (props) => {
                 backgroundColor: colors.background,
                 elevation: 0
             }}>
-                <Appbar.Content title="Recomended" subtitle={"Current Login : " + token} titleStyle={{ color: colors.primary }} />
+                <Appbar.Content title="Recomended" titleStyle={{ color: colors.primary }} />
                 <Appbar.Action icon="logout" onPress={logout} />
             </Appbar>
         }
         body={
-            <Padding horizontal={12}>
-                <FlatList
-                    data={[...movies, ...movies]}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item, index }) => {
-                        return <Card style={{ marginBottom: 12 }}>
+            <FlatList
+                data={movies}
+                contentContainerStyle={{ paddingBottom: 12 }}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => {
+                    return <Padding horizontal={12} top={12}>
+                        <Card>
                             <Card.Cover source={{ uri: item.poster }} />
                             <Card.Title title={item.title} />
                             <Card.Content>
@@ -57,8 +58,8 @@ const MainScreen = (props) => {
                                 <Button onPress={() => onPressItem(item)}>Read More</Button>
                             </Card.Actions>
                         </Card>
-                    }} />
-            </Padding>
+                    </Padding>
+                }} />
         }
         isEmpty={movies.length == 0}
         emptyComponent={

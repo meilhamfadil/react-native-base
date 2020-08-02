@@ -36,7 +36,7 @@ const theme = {
         text: colors.dark,
         primary: colors.primary,
         background: colors.background,
-        accent: colors.accent
+        accent: colors.dark
     },
 };
 
