@@ -10,7 +10,8 @@ const Padding = ({
     right = 0,
     top = 0,
     bottom = 0,
-    color = null
+    color = null,
+    flex = null
 }) => {
     const style = {}
     if (all != 0) style.padding = all
@@ -21,6 +22,7 @@ const Padding = ({
     if (vertical != 0) style.paddingVertical = vertical
     if (horizontal != 0) style.paddingHorizontal = horizontal
     if (color !== null) style.backgroundColor = color
+    if (flex !== null) style.flex = flex
     return <View style={style}>{children}</View>
 }
 

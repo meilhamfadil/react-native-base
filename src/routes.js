@@ -13,6 +13,10 @@ const Routes = ({ initialRoute }) => {
             name="main"
             component={require("./screen/MainScreen").default}
             options={{ headerShown: false }} />
+        <Stack.Screen
+            name="detail"
+            component={require("./screen/DetailScreen").default}
+            options={{ headerShown: false }} />
     </Stack.Navigator>
 }
 

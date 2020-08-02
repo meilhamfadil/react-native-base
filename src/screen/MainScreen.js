@@ -1,44 +1,64 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { Button } from 'react-native-paper'
-import { View, Text } from "react-native"
-import Scaffhold from '../components/Scaffhold'
+import { Card, useTheme, Paragraph, Appbar, Subheading, Title, Button } from 'react-native-paper'
+import { View, Text, Image } from "react-native"
+import { ScaffholdList } from '../components/Scaffhold'
 import Padding from '../components/Padding'
 import { connect } from 'react-redux'
 
 import MovieAction from '../reducer/movieReducer'
-import CenteredContainer from '../components/CenteredContainer'
+import { FlatList } from 'react-native-gesture-handler'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const MainScreen = (props) => {
-    const { movies, error } = props
-    const { busy, requesting } = props
-    const { requestMovies, isMoviesFetching } = props
+    const { navigation } = props
+    const { movies } = props
+    const { requestMovies, clearMovies } = props
+    const { colors } = useTheme()
 
-    const onPressHandler = () => {
-        console.log("hehe")
+    useEffect(() => {
         requestMovies()
+    }, [])
+
+    const onPressItem = (item) => {
+        navigation.navigate("detail", item)
     }
 
-    return <Scaffhold
-        body={
-            <CenteredContainer>
-                <Text style={{ textAlign: "center" }}>
-                    Jumlah List Ada : {movies.length}
-                </Text>
-                {
-                    error != null &&
-                    <Text style={{ textAlign: "center" }}>{error}</Text>
-                }
-            </CenteredContainer>
+    return <ScaffholdList
+        appbar={
+            <Appbar style={{
+                backgroundColor: colors.background,
+                elevation: 0
+            }}>
+                <Appbar.Content title="Recomended" titleStyle={{ color: colors.primary }} />
+                <Appbar.Action icon="dots-horizontal" onPress={() => { }} />
+            </Appbar>
         }
-        bottom={
-            <Padding all={12}>
-                <Button
-                    loading={isMoviesFetching || requesting}
-                    disabled={requesting || busy}
-                    mode="contained"
-                    onPress={onPressHandler}> Load Image </Button>
+        body={
+            <Padding horizontal={12}>
+                <FlatList
+                    data={[...movies, ...movies]}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) => {
+                        return <Card style={{ marginBottom: 12 }}>
+                            <Card.Cover source={{ uri: item.poster }} />
+                            <Card.Title title={item.title} />
+                            <Card.Content>
+                                <Paragraph>{item.synopsis}</Paragraph>
+                            </Card.Content>
+                            <Card.Actions style={{ justifyContent: "flex-end" }}>
+                                <Button onPress={() => onPressItem(item)}>Read More</Button>
+                            </Card.Actions>
+                        </Card>
+                    }} />
             </Padding>
+        }
+        isEmpty={movies.length == 0}
+        emptyComponent={
+            <View style={{ alignItems: "center" }}>
+                <Icon name="error" size={50} color={colors.placeholder}></Icon>
+                <Text style={{ color: colors.placeholder }}>Data Kosong</Text>
+            </View>
         }
     />
 }
@@ -48,14 +68,14 @@ const mapStateToProps = ({ base, movie }) => {
         busy: base.busy,
         requesting: base.requesting,
         movies: movie.list,
-        isMoviesFetching: movie.fetching,
         error: movie.error,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        requestMovies: () => dispatch(MovieAction.moviesRequest())
+        requestMovies: () => dispatch(MovieAction.moviesRequest()),
+        clearMovies: () => dispatch(MovieAction.moviesSuccess([]))
     }
 }
 

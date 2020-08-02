@@ -32,6 +32,13 @@
 		3224C0317FCF49CC8E8F7A98 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD4EE738DBE942889AD8FA55 /* Octicons.ttf */; };
 		48130BD77E27435C9137DF1F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BF2B85B42CD44F59F9E58F5 /* SimpleLineIcons.ttf */; };
 		3F719DBECE1444118652C43F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA700CC147FC4ABE9FD37E31 /* Zocial.ttf */; };
+		3230D239E55E49DF82BE4A8A /* SegoeUI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB1CAE782F48FEBEE07FAB /* SegoeUI.ttf */; };
+		B38DDA793AEE41CFB6AB55BA /* SegoeUIBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3BE9AF7823A4E2BB54E05A2 /* SegoeUIBold.ttf */; };
+		92ED101CAC0547E995F5F446 /* SegoeUIItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FC772933CEC4A9EA3450A3D /* SegoeUIItalic.ttf */; };
+		01395B51B87E4035B437359E /* PTSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3199E531A99B4A89A51E7EE3 /* PTSansBold.ttf */; };
+		2A92576CB2A442008AE6DA13 /* PTSansBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F49D741299C42EA9DD79F82 /* PTSansBoldItalic.ttf */; };
+		832E2A68E52447E689953EE6 /* PTSansItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FCA4E1BD5C24159822B8FEA /* PTSansItalic.ttf */; };
+		D83E13B43E1843E1AA54C25B /* PTSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9853BB4D22D94E658DD62B83 /* PTSansRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +90,13 @@
 		FD4EE738DBE942889AD8FA55 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3BF2B85B42CD44F59F9E58F5 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CA700CC147FC4ABE9FD37E31 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0FFB1CAE782F48FEBEE07FAB /* SegoeUI.ttf */ = {isa = PBXFileReference; name = "SegoeUI.ttf"; path = "../assets/fonts/SegoeUI.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F3BE9AF7823A4E2BB54E05A2 /* SegoeUIBold.ttf */ = {isa = PBXFileReference; name = "SegoeUIBold.ttf"; path = "../assets/fonts/SegoeUIBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6FC772933CEC4A9EA3450A3D /* SegoeUIItalic.ttf */ = {isa = PBXFileReference; name = "SegoeUIItalic.ttf"; path = "../assets/fonts/SegoeUIItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3199E531A99B4A89A51E7EE3 /* PTSansBold.ttf */ = {isa = PBXFileReference; name = "PTSansBold.ttf"; path = "../assets/fonts/PTSansBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6F49D741299C42EA9DD79F82 /* PTSansBoldItalic.ttf */ = {isa = PBXFileReference; name = "PTSansBoldItalic.ttf"; path = "../assets/fonts/PTSansBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6FCA4E1BD5C24159822B8FEA /* PTSansItalic.ttf */ = {isa = PBXFileReference; name = "PTSansItalic.ttf"; path = "../assets/fonts/PTSansItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9853BB4D22D94E658DD62B83 /* PTSansRegular.ttf */ = {isa = PBXFileReference; name = "PTSansRegular.ttf"; path = "../assets/fonts/PTSansRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +223,13 @@
 				FD4EE738DBE942889AD8FA55 /* Octicons.ttf */,
 				3BF2B85B42CD44F59F9E58F5 /* SimpleLineIcons.ttf */,
 				CA700CC147FC4ABE9FD37E31 /* Zocial.ttf */,
+				0FFB1CAE782F48FEBEE07FAB /* SegoeUI.ttf */,
+				F3BE9AF7823A4E2BB54E05A2 /* SegoeUIBold.ttf */,
+				6FC772933CEC4A9EA3450A3D /* SegoeUIItalic.ttf */,
+				3199E531A99B4A89A51E7EE3 /* PTSansBold.ttf */,
+				6F49D741299C42EA9DD79F82 /* PTSansBoldItalic.ttf */,
+				6FCA4E1BD5C24159822B8FEA /* PTSansItalic.ttf */,
+				9853BB4D22D94E658DD62B83 /* PTSansRegular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -368,6 +389,13 @@
 				3224C0317FCF49CC8E8F7A98 /* Octicons.ttf in Resources */,
 				48130BD77E27435C9137DF1F /* SimpleLineIcons.ttf in Resources */,
 				3F719DBECE1444118652C43F /* Zocial.ttf in Resources */,
+				3230D239E55E49DF82BE4A8A /* SegoeUI.ttf in Resources */,
+				B38DDA793AEE41CFB6AB55BA /* SegoeUIBold.ttf in Resources */,
+				92ED101CAC0547E995F5F446 /* SegoeUIItalic.ttf in Resources */,
+				01395B51B87E4035B437359E /* PTSansBold.ttf in Resources */,
+				2A92576CB2A442008AE6DA13 /* PTSansBoldItalic.ttf in Resources */,
+				832E2A68E52447E689953EE6 /* PTSansItalic.ttf in Resources */,
+				D83E13B43E1843E1AA54C25B /* PTSansRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

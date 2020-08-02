@@ -10,7 +10,7 @@ const create = () => {
     })
 
     // Endpoint
-    const getMovie = () => api.get("movies-failure.json").then(intepreter)
+    const getMovie = () => api.get("movies.json").then(intepreter)
 
     // Export
     return {

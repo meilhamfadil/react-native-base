@@ -8,11 +8,17 @@ const INITIAL_STATE = {
 
 // Cases
 const setBusy = (state = INITIAL_STATE, action) => {
-    return state.merge({ busy: action.busy })
+    return {
+        ...state,
+        busy: action.busy
+    }
 }
 
 const setRequesting = (state = INITIAL_STATE, action) => {
-    return state.merge({ requesting: action.requesting })
+    return {
+        ...state,
+        requesting: action.requesting
+    }
 }
 
 // Action
