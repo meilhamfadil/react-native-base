@@ -10,6 +10,10 @@ const Routes = ({ initialRoute }) => {
             component={require("./screen/SplashScreen").default}
             options={{ headerShown: false }} />
         <Stack.Screen
+            name="login"
+            component={require("./screen/LoginScreen").default}
+            options={{ headerShown: false }} />
+        <Stack.Screen
             name="main"
             component={require("./screen/MainScreen").default}
             options={{ headerShown: false }} />

@@ -2,7 +2,7 @@ import { call, put } from "redux-saga/effects"
 import BaseTypes from '../reducer/baseReducer'
 import MovieTypes from '../reducer/movieReducer'
 
-export function* getMovie(api, action) {
+function* getMovie(api, action) {
     yield put(BaseTypes.setRequesting(true))
     const response = yield call(api.getMovie)
     yield put(BaseTypes.setRequesting(false))
@@ -12,4 +12,8 @@ export function* getMovie(api, action) {
     } else {
         yield put(MovieTypes.moviesFailure(response.message))
     }
+}
+
+export default {
+    getMovie
 }

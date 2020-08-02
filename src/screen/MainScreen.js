@@ -7,18 +7,25 @@ import Padding from '../components/Padding'
 import { connect } from 'react-redux'
 
 import MovieAction from '../reducer/movieReducer'
+import CredentialAction from '../reducer/credentialReducer'
 import { FlatList } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { useFocusEffect } from '@react-navigation/native'
 
 const MainScreen = (props) => {
     const { navigation } = props
-    const { movies } = props
-    const { requestMovies, clearMovies } = props
+    const { movies, token } = props
+    const { requestMovies, logout } = props
     const { colors } = useTheme()
 
     useEffect(() => {
         requestMovies()
     }, [])
+
+    useFocusEffect(() => {
+        if (token == null)
+            navigation.replace("login")
+    }, [token])
 
     const onPressItem = (item) => {
         navigation.navigate("detail", item)
@@ -30,8 +37,8 @@ const MainScreen = (props) => {
                 backgroundColor: colors.background,
                 elevation: 0
             }}>
-                <Appbar.Content title="Recomended" titleStyle={{ color: colors.primary }} />
-                <Appbar.Action icon="dots-horizontal" onPress={() => { }} />
+                <Appbar.Content title="Recomended" subtitle={"Current Login : " + token} titleStyle={{ color: colors.primary }} />
+                <Appbar.Action icon="logout" onPress={logout} />
             </Appbar>
         }
         body={
@@ -63,8 +70,9 @@ const MainScreen = (props) => {
     />
 }
 
-const mapStateToProps = ({ base, movie }) => {
+const mapStateToProps = ({ credential, base, movie }) => {
     return {
+        token: credential.token,
         busy: base.busy,
         requesting: base.requesting,
         movies: movie.list,
@@ -75,7 +83,7 @@ const mapStateToProps = ({ base, movie }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         requestMovies: () => dispatch(MovieAction.moviesRequest()),
-        clearMovies: () => dispatch(MovieAction.moviesSuccess([]))
+        logout: () => dispatch(CredentialAction.storeToken(null))
     }
 }
 

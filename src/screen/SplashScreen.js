@@ -1,21 +1,27 @@
 import React from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import Scaffhold from '../components/Scaffhold'
 import { Text } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import DeviceInfo from 'react-native-device-info'
 import * as Animatable from 'react-native-animatable'
 import FillSeparator from '../components/FillSeparator'
-import { Center, Container } from '../components/Container'
+import { Container } from '../components/Container'
 import { useTheme } from 'react-native-paper'
 import Padding from '../components/Padding'
+import { connect } from 'react-redux'
+import CredentialAction from '../reducer/credentialReducer'
 
 const SplashScreen = (props) => {
-    const { navigation } = props
     const { colors } = useTheme()
+    const { navigation } = props
+    const { checkCurrentToken } = props
+    const { isChecked, token } = props
 
-    doCheckCredential = () => {
-        setTimeout(() => navigation.replace("main"), 500);
-    }
+    useFocusEffect(() => {
+        if (isChecked)
+            navigation.replace((token == null) ? "login" : "main")
+    }, [isChecked])
 
     return <Scaffhold
         body={
@@ -29,7 +35,7 @@ const SplashScreen = (props) => {
                     <Animatable.View
                         duration={1000}
                         animation="logoAnimation"
-                        onAnimationEnd={doCheckCredential}>
+                        onAnimationEnd={checkCurrentToken}>
                         <Icon name="memory" size={100} />
                     </Animatable.View>
 
@@ -52,4 +58,17 @@ const SplashScreen = (props) => {
     />
 }
 
-export default SplashScreen
+const mapStateToProps = ({ credential }) => {
+    return {
+        token: credential.token,
+        isChecked: credential.check
+    }
+}
+
+const mapActionToProps = (dispatch) => {
+    return {
+        checkCurrentToken: () => dispatch(CredentialAction.getSavedToken())
+    }
+}
+
+export default connect(mapStateToProps, mapActionToProps)(SplashScreen)
