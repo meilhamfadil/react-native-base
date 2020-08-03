@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { Card, useTheme, Paragraph, Appbar, Subheading, Title, Button } from 'react-native-paper'
+import { Card, useTheme, Paragraph, Appbar, Subheading, Title, Button, FlatList } from 'react-native-paper'
 import { View, Text, Image, RefreshControl } from "react-native"
 import { ScaffholdList } from '../components/Scaffhold'
 import Padding from '../components/Padding'
@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 
 import MovieAction from '../reducer/movieReducer'
 import CredentialAction from '../reducer/credentialReducer'
-import { FlatList } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useFocusEffect } from '@react-navigation/native'
 
