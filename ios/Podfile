@@ -10,7 +10,10 @@ target 'base' do
 
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
+
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
 
   target 'baseTests' do
     inherit! :complete

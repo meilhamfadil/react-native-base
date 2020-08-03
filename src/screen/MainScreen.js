@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { Card, useTheme, Paragraph, Appbar, Subheading, Title, Button } from 'react-native-paper'
-import { View, Text, Image } from "react-native"
+import { View, Text, Image, RefreshControl } from "react-native"
 import { ScaffholdList } from '../components/Scaffhold'
 import Padding from '../components/Padding'
 import { connect } from 'react-redux'
@@ -14,11 +14,12 @@ import { useFocusEffect } from '@react-navigation/native'
 
 const MainScreen = (props) => {
     const { navigation } = props
-    const { movies, token } = props
+    const { movies, token, error, requesting } = props
     const { requestMovies, logout } = props
     const { colors } = useTheme()
 
     useEffect(() => {
+        console.log("HEHE")
         requestMovies()
     }, [])
 
@@ -44,29 +45,36 @@ const MainScreen = (props) => {
         body={
             <FlatList
                 data={movies}
-                contentContainerStyle={{ paddingBottom: 12 }}
+                refreshControl={<RefreshControl
+                    refreshing={requesting}
+                    onRefresh={() => requestMovies()} />}
+                contentContainerStyle={{ padding: 12 }}
                 keyExtractor={(item, index) => index.toString()}
+                style={{ flex: 1 }}
+                ItemSeparatorComponent={() => <View style={{ height: 12 }}></View>}
                 renderItem={({ item, index }) => {
-                    return <Padding horizontal={12} top={12}>
-                        <Card>
-                            <Card.Cover source={{ uri: item.poster }} />
-                            <Card.Title title={item.title} />
-                            <Card.Content>
-                                <Paragraph>{item.synopsis}</Paragraph>
-                            </Card.Content>
-                            <Card.Actions style={{ justifyContent: "flex-end" }}>
-                                <Button onPress={() => onPressItem(item)}>Read More</Button>
-                            </Card.Actions>
-                        </Card>
-                    </Padding>
+                    return <Card>
+                        <Card.Cover source={{ uri: item.poster }} />
+                        <Card.Title title={item.title} />
+                        <Card.Content>
+                            <Paragraph>{item.synopsis}</Paragraph>
+                        </Card.Content>
+                        <Card.Actions style={{ justifyContent: "flex-end" }}>
+                            <Button onPress={() => onPressItem(item)}>Read More</Button>
+                        </Card.Actions>
+                    </Card>
                 }} />
         }
         isEmpty={movies.length == 0}
         emptyComponent={
             <View style={{ alignItems: "center" }}>
                 <Icon name="error" size={50} color={colors.placeholder}></Icon>
-                <Text style={{ color: colors.placeholder }}>Data Kosong</Text>
-            </View>
+                {
+                    (error != null)
+                        ? <Text style={{ color: colors.placeholder }}>{error}</Text>
+                        : <Text style={{ color: colors.placeholder }}>Data Kosong</Text>
+                }
+            </View >
         }
     />
 }

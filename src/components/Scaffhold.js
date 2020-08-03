@@ -2,7 +2,7 @@ import React from 'react'
 import colors from '../../assets/colors'
 import styles from '../../assets/styles'
 
-import { View, ScrollView, KeyboardAvoidingView, Text, ActivityIndicator } from 'react-native'
+import { View, ScrollView, KeyboardAvoidingView, Text, ActivityIndicator, RefreshControl } from 'react-native'
 import { Container, Center } from './Container'
 
 const Scaffhold = ({
@@ -10,12 +10,19 @@ const Scaffhold = ({
     appbar = null,
     bottom = null,
     busy = false,
+    refreshing = false,
+    onRefresh = null,
     bottomStyle = {}
 }) => {
 
     return <View style={{ flex: 1 }}>
         <View>{appbar !== null && appbar}</View>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            refreshControl={(onRefresh != null) ? <RefreshControl
+                onRefresh={() => onRefresh()}
+                refreshing={refreshing} /> : null
+            }>
             {
                 !busy
                     ? body
@@ -56,8 +63,7 @@ const list = ({
             <ActivityIndicator color={colors.dark} size="large" />
             <Text style={{ textAlign: "center", marginTop: 8 }}>Please Wait</Text>
         </View>
-
-
+        
     return <View style={{ flex: 1, backgroundColor: backgroundColor }}>
         <View>{appbar !== null && appbar}</View>
         <View style={{

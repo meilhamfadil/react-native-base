@@ -1,9 +1,10 @@
 import apisauce from 'apisauce'
+import Config from 'react-native-config'
 
 const create = () => {
     // Initialize Api
     const api = apisauce.create({
-        baseURL: "https://meilhamfadil.github.io",
+        baseURL: Config.API_URL,
         headers: {
             "Application-Type": "application/json"
         }
