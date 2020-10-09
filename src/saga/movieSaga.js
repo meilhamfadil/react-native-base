@@ -1,5 +1,5 @@
 import { call, put } from "redux-saga/effects"
-import BaseTypes from '../reducer/baseReducer'
+import BaseTypes from '../reducer/BaseReducers'
 import MovieTypes from '../reducer/movieReducer'
 
 function* getMovie(api, action) {

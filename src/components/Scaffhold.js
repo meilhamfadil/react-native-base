@@ -1,80 +1,46 @@
 import React from 'react'
-import colors from '../../assets/colors'
-import styles from '../../assets/styles'
-
-import { View, ScrollView, KeyboardAvoidingView, Text, ActivityIndicator, RefreshControl } from 'react-native'
-import { Container, Center } from './Container'
+import { View, Text, StyleSheet } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Scaffhold = ({
+    connection = true,
+    properties = {
+        connection: {
+            label: "Disconnect",
+            style: {},
+            icon: "cloud-off-outline",
+            iconSize: 50
+        }
+    },
     body,
-    appbar = null,
-    bottom = null,
-    busy = false,
-    refreshing = false,
-    onRefresh = null,
-    bottomStyle = {}
+    theme = {
+        primary: "#FFFFFF",
+        text: "#DDD"
+    }
 }) => {
-
-    return <View style={{ flex: 1 }}>
-        <View>{appbar !== null && appbar}</View>
-        <ScrollView
-            contentContainerStyle={{ flexGrow: 1 }}
-            refreshControl={(onRefresh != null) ? <RefreshControl
-                onRefresh={() => onRefresh()}
-                refreshing={refreshing} /> : null
-            }>
-            {
-                !busy
-                    ? body
-                    : <View style={styles.mainCenterContainer}>
-                        <ActivityIndicator color={colors.dark} size="large" />
-                        <Text style={{ textAlign: "center", marginTop: 8 }}>Please Wait</Text>
-                    </View>
-            }
-        </ScrollView>
-        <KeyboardAvoidingView>
-            <View style={bottomStyle}>{(bottom !== null && !busy) && bottom}</View>
-        </KeyboardAvoidingView>
-    </View>
-}
-
-const list = ({
-    body,
-    appbar = null,
-    bottom = null,
-    requesting = false,
-    isEmpty = false,
-    emptyMessage = "Empty",
-    emptyComponent = null,
-    backgroundColor = colors.background,
-    containerStyle = {},
-    bottomStyle = {}
-}) => {
-
     let render = body
 
-    if (isEmpty)
-        render = <View style={styles.mainCenterContainer}>
-            {(emptyComponent == null) ? <Text>{emptyMessage}</Text> : emptyComponent}
+    console.log(properties)
+
+    if (!connection)
+        render = <View style={styles.connection}>
+            <Icon name={properties.connection.icon} size={properties.connection.iconSize} />
+            <Text style={{ marginTop: 4, ...properties.connection.style }}>
+                {properties.connection.label}
+            </Text>
         </View>
 
-    if (requesting)
-        render = <View style={styles.mainCenterContainer}>
-            <ActivityIndicator color={colors.dark} size="large" />
-            <Text style={{ textAlign: "center", marginTop: 8 }}>Please Wait</Text>
-        </View>
-        
-    return <View style={{ flex: 1, backgroundColor: backgroundColor }}>
-        <View>{appbar !== null && appbar}</View>
-        <View style={{
-            flex: 1,
-            ...containerStyle
-        }}>{render}</View>
-        <KeyboardAvoidingView>
-            <View style={bottomStyle}>{(bottom !== null) && bottom}</View>
-        </KeyboardAvoidingView>
+    return <View style={{ flex: 1 }}>
+        {render}
     </View>
 }
 
 export default Scaffhold
-export const ScaffholdList = list
+
+const styles = StyleSheet.create({
+    connection: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1
+    }
+})

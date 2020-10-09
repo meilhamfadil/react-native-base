@@ -58,7 +58,7 @@ const Tabs = () => {
 }
 
 const Routes = ({ initialRoute }) => {
-    return <Stack.Navigator initialRouteName={initialRoute} i>
+    return <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen
             name="splash"
             component={require("./screen/SplashScreen").default}

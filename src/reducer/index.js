@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 export default combineReducers({
-    base: require('./baseReducer').reducer,
+    base: require('./BaseReducers').reducer,
     movie: require('./movieReducer').reducer,
     credential: require('./credentialReducer').reducer,
 })
