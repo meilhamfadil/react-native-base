@@ -5,20 +5,13 @@ import { Container } from "../components/Container"
 import Scaffhold from "../components/Scaffhold"
 import Padding from "../components/Padding"
 import { Text, Image } from 'react-native'
-import { Title, Paragraph, Subheading, useTheme, Appbar } from 'react-native-paper'
+import colors from '../../assets/colors'
 
 const DetailScreen = (props) => {
     const { navigation } = props
     const { title, poster, synopsis, year } = props.route.params
-    const { colors } = useTheme()
 
     return <Scaffhold
-        appbar={
-            <Appbar style={{ backgroundColor: colors.background, }}>
-                <Appbar.BackAction style={{ marginRight: 0 }} onPress={() => navigation.goBack()} />
-                <Appbar.Content title={title} titleStyle={{ marginLeft: 0, color: colors.text }} />
-            </Appbar>
-        }
         body={
             <Container style={{ backgroundColor: colors.background }}>
                 <Image source={{ uri: poster }} style={{
@@ -26,11 +19,11 @@ const DetailScreen = (props) => {
                     aspectRatio: 4 / 2
                 }} />
                 <Padding all={12}>
-                    <Title style={{ color: colors.primary }}>{title}</Title>
-                    <Subheading style={{ color: colors.text }}>{year}</Subheading>
-                    <Paragraph style={{
+                    <Text style={{ color: colors.primary }}>{title}</Text>
+                    <Text style={{ color: colors.text }}>{year}</Text>
+                    <Text style={{
                         textAlign: "justify"
-                    }}>{synopsis}</Paragraph>
+                    }}>{synopsis}</Text>
                 </Padding>
             </Container>
         }

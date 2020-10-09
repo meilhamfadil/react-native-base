@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { Card, useTheme, Paragraph, Appbar, Subheading, Title, Button, FlatList } from 'react-native-paper'
-import { View, Text, Image, RefreshControl } from "react-native"
+import { View, Text, Image, RefreshControl, FlatList } from "react-native"
 import { ScaffholdList } from '../components/Scaffhold'
 import Padding from '../components/Padding'
 import { connect } from 'react-redux'
@@ -10,12 +9,12 @@ import MovieAction from '../reducer/movieReducer'
 import CredentialAction from '../reducer/credentialReducer'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useFocusEffect } from '@react-navigation/native'
+import colors from '../../assets/colors'
 
 const MainScreen = (props) => {
     const { navigation } = props
     const { movies, token, error, requesting } = props
     const { requestMovies, logout } = props
-    const { colors } = useTheme()
 
     useEffect(() => {
         console.log("HEHE")
@@ -32,15 +31,6 @@ const MainScreen = (props) => {
     }
 
     return <ScaffholdList
-        appbar={
-            <Appbar style={{
-                backgroundColor: colors.background,
-                elevation: 0
-            }}>
-                <Appbar.Content title="Recomended" titleStyle={{ color: colors.primary }} />
-                <Appbar.Action icon="logout" onPress={logout} />
-            </Appbar>
-        }
         body={
             <FlatList
                 data={movies}
@@ -52,16 +42,9 @@ const MainScreen = (props) => {
                 style={{ flex: 1 }}
                 ItemSeparatorComponent={() => <View style={{ height: 12 }}></View>}
                 renderItem={({ item, index }) => {
-                    return <Card>
-                        <Card.Cover source={{ uri: item.poster }} />
-                        <Card.Title title={item.title} />
-                        <Card.Content>
-                            <Paragraph>{item.synopsis}</Paragraph>
-                        </Card.Content>
-                        <Card.Actions style={{ justifyContent: "flex-end" }}>
-                            <Button onPress={() => onPressItem(item)}>Read More</Button>
-                        </Card.Actions>
-                    </Card>
+                    return <View>
+                        <Text>{item.title}</Text>
+                    </View>
                 }} />
         }
         isEmpty={movies.length == 0}

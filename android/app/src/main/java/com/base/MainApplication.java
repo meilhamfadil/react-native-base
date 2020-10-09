@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -51,7 +51,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    // initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 
   /**

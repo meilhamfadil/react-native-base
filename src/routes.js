@@ -2,13 +2,12 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useTheme } from 'react-native-paper'
+import colors from '../assets/colors'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const Tabs = () => {
-    const { colors } = useTheme()
     return <Tab.Navigator
         backBehavior="history"
         tabBarOptions={{

@@ -2,14 +2,13 @@ import React, { useEffect } from 'react'
 import Scaffhold from '../components/Scaffhold'
 import { Center } from '../components/Container'
 import { connect } from 'react-redux'
-import { Text } from 'react-native'
-import { Button, useTheme } from 'react-native-paper'
+import { Button, Text } from 'react-native'
 import CredentialAction from '../reducer/credentialReducer'
 import { useFocusEffect } from '@react-navigation/native'
+import colors from '../../assets/colors'
 
 const InfoScreen = (props) => {
     const { token, navigation } = props
-    const { colors } = useTheme()
 
     useEffect(() => {
         if (token == null)
@@ -23,10 +22,10 @@ const InfoScreen = (props) => {
             }}>
                 <Text>Current Login ID : {props.token}</Text>
                 <Button
-                    mode="contained"
+                    title="End Session"
                     onPress={props.logout}
                     style={{ marginTop: 12 }}
-                >End Session</Button>
+                />
             </Center>
         }
     />

@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Scaffhold from '../components/Scaffhold'
-
-import { Button } from 'react-native-paper'
 import { Center } from '../components/Container'
 
 import CredentialAction from '../reducer/credentialReducer'
 import { useFocusEffect } from '@react-navigation/native'
+import { Button } from 'react-native'
 
 const LoginScreen = (props) => {
     const { navigation } = props
@@ -21,9 +20,10 @@ const LoginScreen = (props) => {
         body={
             <Center>
                 <Button
-                    mode="contained"
+                    title="Start Session"
                     onPress={() => { props.generateToken(new Date().getTime().toString()) }}
-                    style={{ marginTop: 12 }}>Start Session</Button>
+                    style={{ marginTop: 12 }}
+                />
             </Center>
         }
     />

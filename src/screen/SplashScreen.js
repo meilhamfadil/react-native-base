@@ -7,13 +7,12 @@ import DeviceInfo from 'react-native-device-info'
 import * as Animatable from 'react-native-animatable'
 import FillSeparator from '../components/FillSeparator'
 import { Container } from '../components/Container'
-import { useTheme } from 'react-native-paper'
 import Padding from '../components/Padding'
 import { connect } from 'react-redux'
 import CredentialAction from '../reducer/credentialReducer'
+import colors from '../../assets/colors'
 
 const SplashScreen = (props) => {
-    const { colors } = useTheme()
     const { navigation } = props
     const { checkCurrentToken } = props
     const { isChecked, token } = props
