@@ -1,12 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, RefreshControl } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Scaffhold = ({
-    connection = true,
+    networkStatus = true,
+    isPageScroll = true,
+    isRefreshing = false,
+    onRefresh = () => { },
     properties = {
-        connection: {
-            label: "Disconnect",
+        network: {
+            label: "Perangkat tidak terkoneksi ke internet.",
             style: {},
             icon: "cloud-off-outline",
             iconSize: 50
@@ -20,17 +24,27 @@ const Scaffhold = ({
 }) => {
     let render = body
 
-    console.log(properties)
-
-    if (!connection)
-        render = <View style={styles.connection}>
-            <Icon name={properties.connection.icon} size={properties.connection.iconSize} />
-            <Text style={{ marginTop: 4, ...properties.connection.style }}>
-                {properties.connection.label}
+    if (!networkStatus)
+        render = <View style={styles.network}>
+            <Icon name={properties.network.icon} size={properties.network.iconSize} />
+            <Text style={{ marginTop: 4, ...properties.network.style }}>
+                {properties.network.label}
             </Text>
         </View>
 
-    return <View style={{ flex: 1 }}>
+    if (isPageScroll)
+        return <ScrollView
+            style={{ flex: 1, backgroundColor: theme.primary }}
+            contentContainerStyle={{ flexGrow: 1 }}
+            refreshControl={<RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={onRefresh}
+            />}
+        >
+            {render}
+        </ScrollView>
+
+    return <View style={{ flex: 1, backgroundColor: theme.primary }}>
         {render}
     </View>
 }
@@ -38,7 +52,7 @@ const Scaffhold = ({
 export default Scaffhold
 
 const styles = StyleSheet.create({
-    connection: {
+    network: {
         justifyContent: "center",
         alignItems: "center",
         flex: 1

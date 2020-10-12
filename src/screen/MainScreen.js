@@ -5,18 +5,15 @@ import { connect } from 'react-redux'
 import MovieAction from '../reducer/movieReducer'
 import CredentialAction from '../reducer/credentialReducer'
 import { Center } from '../components/Container'
+import { useAppComponent } from '../Contexts'
 
 const MainScreen = (props) => {
 
-    const { isPhoneConnected } = props
+    const { networkStatus, appName } = useAppComponent()
 
     return <Scaffhold
-        connection={isPhoneConnected}
-        properties={{
-            connection: {
-                label: "Perangkat tidak terhubung."
-            }
-        }}
+        networkStatus={networkStatus}
+        isPageScroll={false}
         body={
             <Center>
                 <Text>Hai</Text>
@@ -27,14 +24,13 @@ const MainScreen = (props) => {
 
 const propsState = ({ base }) => {
     return {
-        isPhoneConnected: base.isPhoneConnected,
     }
 }
 
 const propsAction = (dispatch) => {
     return {
         requestMovies: () => dispatch(MovieAction.moviesRequest()),
-        logout: () => dispatch(CredentialAction.storeToken(null))
+        logout: () => dispatch(CredentialAction.storeToken(null)),
     }
 }
 

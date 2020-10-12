@@ -4,35 +4,36 @@ import NetInfo from "@react-native-community/netinfo"
 import Routes from './routes'
 import { connect } from 'react-redux'
 import BaseActions from './reducer/BaseReducers'
-
-const initialRoute = "splash"
+import { AppComponentProvider } from './Contexts'
 
 const AppComponent = (props) => {
 
     // App
 
     // Payload
-    const { setPhoneConnection } = props
 
+    // Action
+
+    // State & Ref
+    const [phoneStatus, setPhoneStatus] = useState(false)
+
+    // Effect
     useEffect(() => {
         const netHandler = NetInfo.addEventListener(state => {
-            setPhoneConnection(state.isConnected)
+            setPhoneStatus(state.isConnected)
         })
 
         return netHandler
     }, [])
 
-    return <NavigationContainer>
-        <Routes initialRoute={initialRoute} />
-    </NavigationContainer>
+    return <AppComponentProvider value={{
+        networkStatus: phoneStatus,
+        appName: "Fadil App"
+    }}>
+        <NavigationContainer>
+            <Routes initialRoute="splash" />
+        </NavigationContainer>
+    </AppComponentProvider>
 }
 
-const propsState = ({ }) => ({
-
-})
-
-const propsAction = (dispatch) => ({
-    setPhoneConnection: (value) => dispatch(BaseActions.setPhoneConnection(value))
-})
-
-export default connect(propsState, propsAction)(AppComponent)
+export default AppComponent
