@@ -1,23 +1,33 @@
 import React from 'react'
-import { StyleSheet, Text } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import Scaffhold from '../components/Scaffhold'
 import { connect } from 'react-redux'
-import MovieAction from '../reducer/movieReducer'
-import CredentialAction from '../reducer/credentialReducer'
-import { Center } from '../components/Container'
-import { useAppComponent } from '../Contexts'
+import { useAppComponent, useTheme } from '../Contexts'
 
 const MainScreen = (props) => {
 
-    const { networkStatus, appName } = useAppComponent()
+    const { networkStatus } = useAppComponent()
+    const { colors } = useTheme()
 
     return <Scaffhold
         networkStatus={networkStatus}
-        isPageScroll={false}
+        onRefresh={() => {
+            console.log("Refresh HIT")
+        }}
         body={
-            <Center>
-                <Text>Hai</Text>
-            </Center>
+            <View style={{ flex: 1, padding: 12 }}>
+                <Text style={{
+                    fontSize: 18,
+                    fontWeight: "bold"
+                }}>Hello</Text>
+
+                <View style={{
+                    height: 200,
+                    backgroundColor: colors.primary
+                }}>
+
+                </View>
+            </View>
         }
     />
 }
@@ -29,15 +39,10 @@ const propsState = ({ base }) => {
 
 const propsAction = (dispatch) => {
     return {
-        requestMovies: () => dispatch(MovieAction.moviesRequest()),
-        logout: () => dispatch(CredentialAction.storeToken(null)),
     }
 }
 
 export default connect(propsState, propsAction)(MainScreen)
 
 const styles = StyleSheet.create({
-    connectionStyle: {
-        fontSize: 20
-    }
 })

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import NetInfo from "@react-native-community/netinfo"
 import Routes from './routes'
-import { connect } from 'react-redux'
-import BaseActions from './reducer/BaseReducers'
+import DeviceInfo from 'react-native-device-info'
 import { AppComponentProvider } from './Contexts'
+import Globalfont from 'react-native-global-font'
+import navigator from './navigator'
 
 const AppComponent = (props) => {
 
@@ -15,20 +16,23 @@ const AppComponent = (props) => {
     // Action
 
     // State & Ref
-    const [phoneStatus, setPhoneStatus] = useState(false)
+    const [networkStatus, setNetworkStatus] = useState(false)
 
     // Effect
     useEffect(() => {
+        Globalfont.applyGlobal("SourceSansPro")
         const netHandler = NetInfo.addEventListener(state => {
-            setPhoneStatus(state.isConnected)
+            setNetworkStatus(state.isConnected)
         })
 
         return netHandler
     }, [])
 
     return <AppComponentProvider value={{
-        networkStatus: phoneStatus,
-        appName: "Fadil App"
+        networkStatus: networkStatus,
+        appVersion: DeviceInfo.getVersion(),
+        appName: "React Native Base",
+        navigator: navigator
     }}>
         <NavigationContainer>
             <Routes initialRoute="splash" />

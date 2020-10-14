@@ -2,41 +2,42 @@ import React from 'react'
 import { View, Text, StyleSheet, RefreshControl } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useTheme } from '../Contexts'
 
 const Scaffhold = ({
     networkStatus = true,
-    isPageScroll = true,
+    networkProperties = {
+        label: "Perangkat tidak terkoneksi ke internet.",
+        style: {},
+        icon: "cloud-off-outline",
+        iconSize: 50
+    },
+    isPageCanScroll = true,
     isRefreshing = false,
     onRefresh = () => { },
-    properties = {
-        network: {
-            label: "Perangkat tidak terkoneksi ke internet.",
-            style: {},
-            icon: "cloud-off-outline",
-            iconSize: 50
-        }
-    },
     body,
-    theme = {
-        primary: "#FFFFFF",
-        text: "#DDD"
-    }
+    theme = useTheme()
 }) => {
     let render = body
 
     if (!networkStatus)
         render = <View style={styles.network}>
-            <Icon name={properties.network.icon} size={properties.network.iconSize} />
-            <Text style={{ marginTop: 4, ...properties.network.style }}>
-                {properties.network.label}
+            <Icon name={networkProperties.icon} size={networkProperties.iconSize} color={theme.colors.text} />
+            <Text style={{
+                marginTop: 4,
+                color: theme.colors.text,
+                ...networkProperties.style,
+            }}>
+                {networkProperties.label}
             </Text>
         </View>
 
-    if (isPageScroll)
+    if (isPageCanScroll)
         return <ScrollView
-            style={{ flex: 1, backgroundColor: theme.primary }}
+            style={{ flex: 1, backgroundColor: theme.colors.background }}
             contentContainerStyle={{ flexGrow: 1 }}
             refreshControl={<RefreshControl
+                tintColor={theme.colors.text}
                 refreshing={isRefreshing}
                 onRefresh={onRefresh}
             />}
@@ -44,7 +45,7 @@ const Scaffhold = ({
             {render}
         </ScrollView>
 
-    return <View style={{ flex: 1, backgroundColor: theme.primary }}>
+    return <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
         {render}
     </View>
 }

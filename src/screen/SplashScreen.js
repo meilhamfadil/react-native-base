@@ -1,73 +1,67 @@
 import React from 'react'
-import { useFocusEffect } from '@react-navigation/native'
 import Scaffhold from '../components/Scaffhold'
-import { Text } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import DeviceInfo from 'react-native-device-info'
+import { StyleSheet, Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as Animatable from 'react-native-animatable'
-import FillSeparator from '../components/FillSeparator'
-import { Container } from '../components/Container'
-import Padding from '../components/Padding'
-import { connect } from 'react-redux'
-import CredentialAction from '../reducer/credentialReducer'
-import colors from '../../assets/colors'
+import { useAppComponent, useNavigator, useTheme } from '../Contexts'
+import Fill from '../components/Fill'
 
 const SplashScreen = (props) => {
-    const { navigation } = props
-    const { checkCurrentToken } = props
-    const { isChecked, token } = props
 
-    useFocusEffect(() => {
-        if (isChecked)
-            navigation.replace((token == null) ? "login" : "main")
-    }, [isChecked])
+    const { navigation } = props
+    const { appVersion, appName, navigator } = useAppComponent()
+    const { colors } = useTheme()
+    const { goToMain } = useNavigator()
 
     return <Scaffhold
         body={
-            <Padding all={24} flex={1}>
-                <Container style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    <FillSeparator />
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                flex: 1,
+                padding: 16
+            }}>
 
-                    <Animatable.View
-                        duration={1000}
-                        animation="logoAnimation"
-                        onAnimationEnd={checkCurrentToken}>
-                        <Icon name="memory" size={100} />
-                    </Animatable.View>
+                <Fill />
 
-                    <Animatable.Text
-                        duration={400}
-                        animation="blink"
-                        style={{
-                            marginTop: 8,
-                            fontSize: 20,
-                            color: colors.primary,
-                            fontWeight: "bold"
-                        }}> Base React App </Animatable.Text>
+                <Animatable.View
+                    duration={800}
+                    animation="logoAnimation"
+                    onAnimationEnd={() => {
+                        navigation.dispatch(navigator.goToMain)
+                    }}>
+                    <Icon name="memory" size={100} color={colors.primary} />
+                </Animatable.View>
 
-                    <FillSeparator />
+                <Animatable.Text
+                    duration={400}
+                    animation="blink"
+                    style={{
+                        ...styles.appName,
+                        color: colors.primary
+                    }}>
+                    {appName}
+                </Animatable.Text>
 
-                    <Text style={{ marginTop: 8, fontSize: 16 }}>{DeviceInfo.getVersion()}</Text>
-                </Container >
-            </Padding>
+                <Fill />
+
+                <Text style={styles.versionCode}>Ver {appVersion}</Text>
+
+            </View>
         }
     />
 }
 
-const mapStateToProps = ({ credential }) => {
-    return {
-        token: credential.token,
-        isChecked: credential.check
-    }
-}
+export default SplashScreen
 
-const mapActionToProps = (dispatch) => {
-    return {
-        checkCurrentToken: () => dispatch(CredentialAction.getSavedToken())
+const styles = StyleSheet.create({
+    appName: {
+        marginTop: 8,
+        fontSize: 20,
+        fontWeight: "bold"
+    },
+    versionCode: {
+        marginBottom: 8,
+        fontSize: 16
     }
-}
-
-export default connect(mapStateToProps, mapActionToProps)(SplashScreen)
+})

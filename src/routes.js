@@ -2,22 +2,22 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import colors from '../assets/colors'
+import { useTheme } from './Contexts'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const Tabs = () => {
+    const { colors } = useTheme()
+
     return <Tab.Navigator
         backBehavior="history"
         tabBarOptions={{
-            showLabel: false,
-            activeTintColor: colors.primary,
-            inactiveTintColor: "#7f7f7f",
-            activeBackgroundColor: colors.background,
-            inactiveBackgroundColor: colors.background,
+            showLabel: true,
+            activeTintColor: colors.primaryDark,
+            inactiveTintColor: colors.dark,
             labelStyle: {
-                marginBottom: 4
+                paddingBottom: 4
             },
             tabStyle: {
                 borderTopWidth: 0.5,
@@ -32,27 +32,15 @@ const Tabs = () => {
             }} />
         <Tab.Screen
             name="Search"
-            component={require("./screen/InfoScreen").default}
+            component={require("./screen/EmptyScreen").default}
             options={{
                 tabBarIcon: ({ color }) => <Icon name="magnify" size={24} color={color} />
             }} />
         <Tab.Screen
             name="Add"
-            component={require("./screen/InfoScreen").default}
+            component={require("./screen/EmptyScreen").default}
             options={{
                 tabBarIcon: ({ color }) => <Icon name="plus" size={24} color={color} />
-            }} />
-        <Tab.Screen
-            name="Info"
-            component={require("./screen/InfoScreen").default}
-            options={{
-                tabBarIcon: ({ color }) => <Icon name="account" size={24} color={color} />
-            }} />
-        <Tab.Screen
-            name="Setting"
-            component={require("./screen/InfoScreen").default}
-            options={{
-                tabBarIcon: ({ color }) => <Icon name="cog" size={24} color={color} />
             }} />
     </Tab.Navigator>
 }
@@ -64,16 +52,8 @@ const Routes = ({ initialRoute }) => {
             component={require("./screen/SplashScreen").default}
             options={{ headerShown: false }} />
         <Stack.Screen
-            name="login"
-            component={require("./screen/LoginScreen").default}
-            options={{ headerShown: false }} />
-        <Stack.Screen
             name="main"
             component={Tabs}
-            options={{ headerShown: false }} />
-        <Stack.Screen
-            name="detail"
-            component={require("./screen/DetailScreen").default}
             options={{ headerShown: false }} />
     </Stack.Navigator>
 }

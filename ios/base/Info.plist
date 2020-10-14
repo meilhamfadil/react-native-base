@@ -78,6 +78,18 @@
 		<string>PTSansBoldItalic.ttf</string>
 		<string>PTSansItalic.ttf</string>
 		<string>PTSansRegular.ttf</string>
+		<string>SourceSansPro.ttf</string>
+		<string>SourceSansProBlack.ttf</string>
+		<string>SourceSansProBlackItalic.ttf</string>
+		<string>SourceSansProBold.ttf</string>
+		<string>SourceSansProBoldItalic.ttf</string>
+		<string>SourceSansProExtraLight.ttf</string>
+		<string>SourceSansProExtraLightItalic.ttf</string>
+		<string>SourceSansProItalic.ttf</string>
+		<string>SourceSansProLight.ttf</string>
+		<string>SourceSansProLightItalic.ttf</string>
+		<string>SourceSansProSemiBold.ttf</string>
+		<string>SourceSansProSemiBoldItalic.ttf</string>
 	</array>
 </dict>
 </plist>
