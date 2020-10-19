@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as Animatable from 'react-native-animatable'
 import { useAppComponent, useNavigator, useTheme } from '../Contexts'
 import Fill from '../components/Fill'
+import colors from '../../assets/colors'
 
 const SplashScreen = (props) => {
 
@@ -18,6 +19,7 @@ const SplashScreen = (props) => {
             <View style={{
                 justifyContent: 'center',
                 alignItems: 'center',
+                backgroundColor: colors.primary,
                 flex: 1,
                 padding: 16
             }}>
@@ -27,10 +29,8 @@ const SplashScreen = (props) => {
                 <Animatable.View
                     duration={800}
                     animation="logoAnimation"
-                    onAnimationEnd={() => {
-                        navigation.dispatch(navigator.goToMain)
-                    }}>
-                    <Icon name="memory" size={100} color={colors.primary} />
+                    onAnimationEnd={() => setTimeout(() => navigation.dispatch(navigator.goToMain), 1000)}>
+                    <Icon name="checkbox-marked-outline" size={100} color={colors.white} />
                 </Animatable.View>
 
                 <Animatable.Text
@@ -38,7 +38,7 @@ const SplashScreen = (props) => {
                     animation="blink"
                     style={{
                         ...styles.appName,
-                        color: colors.primary
+                        color: colors.white
                     }}>
                     {appName}
                 </Animatable.Text>
@@ -47,7 +47,7 @@ const SplashScreen = (props) => {
 
                 <Text style={styles.versionCode}>Ver {appVersion}</Text>
 
-            </View>
+            </View >
         }
     />
 }
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     versionCode: {
+        color: colors.white,
         marginBottom: 8,
         fontSize: 16
     }

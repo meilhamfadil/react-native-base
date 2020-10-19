@@ -7,6 +7,7 @@ import navigator from './navigator'
 
 export const AppComponentContext = React.createContext({
     networkStatus: false,
+    keyboardShown: false,
     appVersion: "",
     appName: "",
     navigator: navigator,
@@ -18,7 +19,11 @@ export const ThemeContext = React.createContext({
     colors: colors,
     styles: styles,
     animations: animations,
-    images: images
+    images: images,
+    font: {
+        normal: "SourceSansPro",
+        light: "SourceSansProLight"
+    }
 })
 export const ThemeProvider = ThemeContext.Provider
 export const useTheme = () => React.useContext(ThemeContext)

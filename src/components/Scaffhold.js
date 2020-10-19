@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, RefreshControl } from 'react-native'
+import { View, Text, StyleSheet, RefreshControl, SafeAreaView } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useTheme } from '../Contexts'
@@ -13,6 +13,7 @@ const Scaffhold = ({
         iconSize: 50
     },
     isPageCanScroll = true,
+    isPageCanRefresh = true,
     isRefreshing = false,
     onRefresh = () => { },
     body,
@@ -36,7 +37,8 @@ const Scaffhold = ({
         return <ScrollView
             style={{ flex: 1, backgroundColor: theme.colors.background }}
             contentContainerStyle={{ flexGrow: 1 }}
-            refreshControl={<RefreshControl
+            keyboardShouldPersistTaps="handled"
+            refreshControl={isPageCanRefresh && <RefreshControl
                 tintColor={theme.colors.text}
                 refreshing={isRefreshing}
                 onRefresh={onRefresh}
@@ -45,9 +47,11 @@ const Scaffhold = ({
             {render}
         </ScrollView>
 
-    return <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
-        {render}
-    </View>
+    return <SafeAreaView>
+        <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+            {render}
+        </View>
+    </SafeAreaView>
 }
 
 export default Scaffhold

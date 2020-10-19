@@ -53,7 +53,7 @@ const Routes = ({ initialRoute }) => {
             options={{ headerShown: false }} />
         <Stack.Screen
             name="main"
-            component={Tabs}
+            component={require("./screen/MainScreen").default}
             options={{ headerShown: false }} />
     </Stack.Navigator>
 }
