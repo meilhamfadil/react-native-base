@@ -1,12 +1,12 @@
 import { call, put } from "redux-saga/effects"
 import CredentialTypes from '../reducer/credentialReducer'
 
-function* getCurrentCredential(storage, action) {
+function* getCurrentCredential(storage: any, action: any) {
     const token = yield call(storage.retriveToken)
     yield put(CredentialTypes.setCurrentToken(token))
 }
 
-function* storeToken(storage, action) {
+function* storeToken(storage: any, action: any) {
     if (action.token == null)
         yield call(storage.removeToken)
     else

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useTheme } from './Contexts'
+import { InteractionManager } from 'react-native'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -25,12 +26,6 @@ const Tabs = () => {
             },
         }}>
         <Tab.Screen
-            name="Home"
-            component={require("./screen/MainScreen").default}
-            options={{
-                tabBarIcon: ({ color }) => <Icon name="menu" size={24} color={color} />
-            }} />
-        <Tab.Screen
             name="Search"
             component={require("./screen/EmptyScreen").default}
             options={{
@@ -45,15 +40,19 @@ const Tabs = () => {
     </Tab.Navigator>
 }
 
-const Routes = ({ initialRoute }) => {
+interface Props {
+    initialRoute: string
+}
+
+const Routes = ({ initialRoute }: Props) => {
     return <Stack.Navigator initialRouteName={initialRoute}>
         <Stack.Screen
             name="splash"
             component={require("./screen/SplashScreen").default}
             options={{ headerShown: false }} />
         <Stack.Screen
-            name="main"
-            component={require("./screen/MainScreen").default}
+            name="auth"
+            component={require("./screen/AuthScreen").default}
             options={{ headerShown: false }} />
     </Stack.Navigator>
 }

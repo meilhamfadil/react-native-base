@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const EmptyScreen = (props) => {
+const EmptyScreen = (props: {}) => {
 
     return <Scaffhold
         body={
@@ -20,12 +20,16 @@ const EmptyScreen = (props) => {
     />
 }
 
-const propsState = ({ base }) => {
+interface Props {
+
+}
+
+const propsState = (props: Props) => {
     return {
     }
 }
 
-const propsAction = (dispatch) => {
+const propsAction = (dispatch: CallableFunction) => {
     return {
     }
 }

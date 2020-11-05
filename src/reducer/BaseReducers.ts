@@ -9,15 +9,15 @@ const INITIAL_STATE = Immutable({
 })
 
 // Cases
-export const setBusy = (state = INITIAL_STATE, action) => state.merge({
+export const setBusy = (state = INITIAL_STATE, action: any) => state.merge({
     isBusy: action.value
 })
 
-export const setRequesting = (state = INITIAL_STATE, action) => state.merge({
+export const setRequesting = (state = INITIAL_STATE, action: any) => state.merge({
     isRequesting: action.value
 })
 
-export const setPhoneConnection = (state = INITIAL_STATE, action) => state.merge({
+export const setPhoneConnection = (state = INITIAL_STATE, action: any) => state.merge({
     isPhoneConnected: action.value
 })
 
@@ -38,7 +38,7 @@ const HANDLERS = {
 // Export
 export const reducer = createReducer(INITIAL_STATE, HANDLERS)
 export const BaseTypes = Types
-export default BaseActions = {
+export default {
     setBusy: Creators.setBusy,
     setRequesting: Creators.setRequesting,
     setPhoneConnection: Creators.setPhoneConnection

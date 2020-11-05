@@ -7,5 +7,7 @@ export default {
     dark: "#b0b3b8",
     light: "#dddddd",
     text: "#202021",
+    error: "#aa1e32",
+    disable: "#b0b3b8",
     background: "#FFFFFF",
 }

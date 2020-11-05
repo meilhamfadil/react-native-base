@@ -1,3 +1,4 @@
+import { any } from 'prop-types'
 import React from 'react'
 import { View, Text, StyleSheet, RefreshControl, SafeAreaView } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -16,7 +17,7 @@ const Scaffhold = ({
     isPageCanRefresh = true,
     isRefreshing = false,
     onRefresh = () => { },
-    body,
+    body = <View></View>,
     theme = useTheme()
 }) => {
     let render = body
@@ -38,11 +39,11 @@ const Scaffhold = ({
             style={{ flex: 1, backgroundColor: theme.colors.background }}
             contentContainerStyle={{ flexGrow: 1 }}
             keyboardShouldPersistTaps="handled"
-            refreshControl={isPageCanRefresh && <RefreshControl
-                tintColor={theme.colors.text}
-                refreshing={isRefreshing}
-                onRefresh={onRefresh}
-            />}
+        // refreshControl={isPageCanRefresh && <RefreshControl
+        //     tintColor={theme.colors.text}
+        //     refreshing={isRefreshing}
+        //     onRefresh={onRefresh}
+        // />}
         >
             {render}
         </ScrollView>

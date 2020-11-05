@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import NetInfo from "@react-native-community/netinfo"
 import Routes from './routes'
 import DeviceInfo from 'react-native-device-info'
 import { AppComponentProvider } from './Contexts'
-import Globalfont from 'react-native-global-font'
+// import Globalfont from 'react-native-global-font'
 import navigator from './navigator'
 import { Keyboard } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
 
-const AppComponent = (props) => {
+interface Props {
+    navigation: string
+}
+
+const AppComponent = (props: Props) => {
 
     // App
+    const { navigation } = props
 
     // Payload
 
@@ -22,12 +27,12 @@ const AppComponent = (props) => {
 
     // Effect
     useEffect(() => {
-        Globalfont.applyGlobal("SourceSansPro")
+        // Globalfont.applyGlobal("SourceSansPro")
 
-        let timeout = null
+        let timeout: any
         const netHandler = NetInfo.addEventListener(state => setNetworkStatus(state.isConnected))
         const keyboardShown = Keyboard.addListener("keyboardDidShow", () => {
-            if (timeout != null)
+            if (timeout == undefined)
                 clearTimeout(timeout)
             setKeyboardShown(true)
         })

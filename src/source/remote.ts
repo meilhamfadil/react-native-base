@@ -20,7 +20,7 @@ const create = () => {
 }
 
 
-const intepreter = (response) => {
+const intepreter = (response: any) => {
     if (response.ok) {
         return response.data
     } else {

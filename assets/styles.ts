@@ -9,5 +9,16 @@ export default StyleSheet.create({
     separator: {
         height: 1,
         backgroundColor: colors.dark
+    },
+    inputField: {
+        paddingVertical: 4,
+        paddingHorizontal: 12,
+        borderColor: colors.dark,
+        borderRadius: 4,
+        borderWidth: 1,
+    },
+    inputLabel: {
+        marginBottom: 4,
+        fontWeight: "bold"
     }
 })

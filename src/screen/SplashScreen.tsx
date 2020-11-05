@@ -7,12 +7,18 @@ import { useAppComponent, useNavigator, useTheme } from '../Contexts'
 import Fill from '../components/Fill'
 import colors from '../../assets/colors'
 
-const SplashScreen = (props) => {
+interface Props {
+    navigation: {
+        dispatch: (type: any) => {}
+    }
+}
+
+const SplashScreen = (props: Props) => {
 
     const { navigation } = props
     const { appVersion, appName, navigator } = useAppComponent()
     const { colors } = useTheme()
-    const { goToMain } = useNavigator()
+    const { goToAuth } = useNavigator()
 
     return <Scaffhold
         body={
@@ -29,7 +35,7 @@ const SplashScreen = (props) => {
                 <Animatable.View
                     duration={800}
                     animation="logoAnimation"
-                    onAnimationEnd={() => setTimeout(() => navigation.dispatch(navigator.goToMain), 1000)}>
+                    onAnimationEnd={() => setTimeout(() => navigation.dispatch(navigator.goToAuth), 1000)}>
                     <Icon name="checkbox-marked-outline" size={100} color={colors.white} />
                 </Animatable.View>
 

@@ -1,14 +1,16 @@
 import { createReducer, createActions } from 'reduxsauce'
+import Immutable from 'seamless-immutable'
 
 // Initial State
-const INITIAL_STATE = {
-    token: null,
+const INITIAL_STATE = Immutable({
+    token: false,
     check: false,
     stored: false
-}
+})
+
 
 // Cases
-const setCurrentToken = (state = INITIAL_STATE, action) => {
+const setCurrentToken = (state = INITIAL_STATE, action: any) => {
     return {
         ...state,
         check: true,
@@ -16,7 +18,7 @@ const setCurrentToken = (state = INITIAL_STATE, action) => {
     }
 }
 
-const tokenStored = (state = INITIAL_STATE, action) => {
+const tokenStored = (state = INITIAL_STATE, action: any) => {
     return {
         ...state,
         stored: action.status
@@ -36,7 +38,7 @@ const HANDLERS = {
     [Types.STORE_TOKEN]: null,
     [Types.TOKEN_STORED]: tokenStored,
     [Types.SET_CURRENT_TOKEN]: setCurrentToken,
-    [Types.GET_SAVED_TOKEN]: null,
+    [Types.GET_SAVED_TOKEN]: null
 }
 
 // Export

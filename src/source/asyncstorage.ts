@@ -6,7 +6,7 @@ const KEY = {
 
 const createStorage = () => {
 
-    const storeToken = (value) => AsyncStorage.setItem(KEY.CREDENTIAL, value)
+    const storeToken = (value: any) => AsyncStorage.setItem(KEY.CREDENTIAL, value)
 
     const removeToken = () => AsyncStorage.removeItem(KEY.CREDENTIAL)
 
