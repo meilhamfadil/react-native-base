@@ -2,10 +2,9 @@ import React from 'react'
 import { Provider } from 'react-redux';
 import { registerAnimation } from './assets/animations'
 
-import store from './src/redux/storeApp'
+import store from './src/data/reducer/store'
 import AppComponent from './src/AppComponent'
 
-// Register Base
 registerAnimation()
 
 export default function App() {
